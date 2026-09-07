@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>BankFlow | Relationship Banking Dashboard</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <aside class="sidebar">
+    <div class="brand">
+      <div class="brand-mark">BF</div>
+      <div><strong>BankFlow</strong><span>Relationship Banking</span></div>
+    </div>
+    <nav>
+      <button class="nav-link active" data-view="overview">Overview</button>
+      <button class="nav-link" data-view="clients">Clients</button>
+      <button class="nav-link" data-view="cases">Service Cases</button>
+      <button class="nav-link" data-view="regcc">Funds Availability</button>
+      <button class="nav-link" data-view="analytics">Analytics</button>
+    </nav>
+    <div class="sidebar-note">Demo data only. No real customer information.</div>
+  </aside>
+
+  <main>
+    <header class="topbar">
+      <div>
+        <p class="eyebrow">Portfolio Project</p>
+        <h1>Relationship Banking Dashboard</h1>
+      </div>
+      <button id="newCaseBtn" class="primary-btn">+ New Service Case</button>
+    </header>
+
+    <section id="overview" class="view active-view">
+      <div class="metric-grid">
+        <article class="metric-card"><span>Managed Relationships</span><strong id="clientCount">0</strong><small>fictional household relationships</small></article>
+        <article class="metric-card"><span>Open Service Cases</span><strong id="openCaseCount">0</strong><small>requiring banker follow-up</small></article>
+        <article class="metric-card"><span>Follow-ups Due</span><strong id="followupCount">0</strong><small>next 7 days</small></article>
+        <article class="metric-card"><span>Avg. Relationship Value</span><strong id="avgRelationship">$0</strong><small>demo balances across products</small></article>
+      </div>
+
+      <div class="content-grid two-one">
+        <article class="panel">
+          <div class="panel-head"><div><p class="eyebrow">Today</p><h2>Relationship Opportunities</h2></div><span class="badge">Needs-based</span></div>
+          <div id="opportunityList" class="stack-list"></div>
+        </article>
+        <article class="panel">
+          <div class="panel-head"><div><p class="eyebrow">Workflow</p><h2>Banker Follow-ups</h2></div></div>
+          <div id="followupList" class="timeline"></div>
+        </article>
+      </div>
+
+      <article class="panel">
+        <div class="panel-head"><div><p class="eyebrow">Service</p><h2>Priority Cases</h2></div><button class="text-btn" data-nav="cases">View all</button></div>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Case</th><th>Client</th><th>Type</th><th>Priority</th><th>Status</th><th>Next Step</th></tr></thead>
+            <tbody id="priorityCases"></tbody>
+          </table>
+        </div>
+      </article>
+    </section>
+
+    <section id="clients" class="view">
+      <article class="panel">
+        <div class="panel-head responsive-head">
+          <div><p class="eyebrow">Portfolio</p><h2>Client Relationships</h2></div>
+          <input id="clientSearch" class="search" placeholder="Search client, goal, or product..." />
+        </div>
+        <div id="clientCards" class="client-grid"></div>
+      </article>
+    </section>
+
+    <section id="cases" class="view">
+      <article class="panel">
+        <div class="panel-head responsive-head">
+          <div><p class="eyebrow">Operations</p><h2>Service Case Queue</h2></div>
+          <div class="filters">
+            <select id="statusFilter"><option value="all">All statuses</option><option>Open</option><option>Pending Customer</option><option>Escalated</option><option>Resolved</option></select>
+            <select id="priorityFilter"><option value="all">All priorities</option><option>High</option><option>Medium</option><option>Low</option></select>
+          </div>
+        </div>
+        <div id="caseCards" class="stack-list"></div>
+      </article>
+    </section>
+
+    <section id="regcc" class="view">
+      <div class="content-grid equal">
+        <article class="panel">
+          <div class="panel-head"><div><p class="eyebrow">Educational Demo</p><h2>Funds Availability Estimator</h2></div></div>
+          <p class="muted">A simplified learning tool inspired by common funds-availability concepts. It is not legal or compliance advice and does not model every exception.</p>
+          <form id="holdForm" class="form-grid">
+            <label>Deposit amount<input type="number" id="depositAmount" min="0" value="2500" required /></label>
+            <label>Deposit type<select id="depositType"><option value="cash">Cash</option><option value="government">Government check</option><option value="cashier">Cashier's / certified check</option><option value="other">Other check</option></select></label>
+            <label>Account age<select id="accountAge"><option value="established">Established account</option><option value="new">New account</option></select></label>
+            <label>Deposit channel<select id="depositChannel"><option>In branch</option><option>ATM</option><option>Mobile deposit</option></select></label>
+            <button class="primary-btn" type="submit">Estimate Availability</button>
+          </form>
+        </article>
+        <article class="panel result-card">
+          <p class="eyebrow">Example Result</p>
+          <h2 id="holdHeadline">Enter a deposit scenario</h2>
+          <p id="holdResult" class="muted">The estimator will explain a simplified availability timeline and when banker review may be appropriate.</p>
+          <div id="holdSteps" class="timeline"></div>
+        </article>
+      </div>
+      <article class="panel knowledge-panel">
+        <div class="panel-head"><div><p class="eyebrow">Reference</p><h2>Banking Workflow Notes</h2></div></div>
+        <div class="knowledge-grid">
+          <div><strong>Document clearly</strong><p>Capture deposit type, amount, channel, account history, customer communication, and any exception reason.</p></div>
+          <div><strong>Explain timing</strong><p>Use plain language so customers understand what is available now, what may be delayed, and what happens next.</p></div>
+          <div><strong>Escalate exceptions</strong><p>Unusual holds, suspected fraud, repeated overdrafts, and policy exceptions should be routed to the appropriate team.</p></div>
+        </div>
+      </article>
+    </section>
+
+    <section id="analytics" class="view">
+      <div class="metric-grid">
+        <article class="metric-card"><span>Total Demo Deposits</span><strong id="totalDeposits">$0</strong><small>across fictional relationships</small></article>
+        <article class="metric-card"><span>Product Penetration</span><strong id="productPenetration">0</strong><small>avg. products per relationship</small></article>
+        <article class="metric-card"><span>Resolution Rate</span><strong id="resolutionRate">0%</strong><small>service cases resolved</small></article>
+        <article class="metric-card"><span>High Priority Cases</span><strong id="highPriorityCount">0</strong><small>active + resolved demo cases</small></article>
+      </div>
+      <div class="content-grid equal">
+        <article class="panel"><div class="panel-head"><div><p class="eyebrow">Portfolio Mix</p><h2>Products per Client</h2></div></div><div id="productBars" class="bars"></div></article>
+        <article class="panel"><div class="panel-head"><div><p class="eyebrow">Service Trends</p><h2>Cases by Category</h2></div></div><div id="caseBars" class="bars"></div></article>
+      </div>
+    </section>
+  </main>
+
+  <dialog id="caseDialog">
+    <form id="caseForm" method="dialog" class="dialog-form">
+      <div class="dialog-head"><div><p class="eyebrow">New Workflow</p><h2>Create Service Case</h2></div><button type="button" id="closeDialog" class="icon-btn">×</button></div>
+      <label>Client<select id="caseClient" required></select></label>
+      <label>Case type<select id="caseType"><option>Debit Card Dispute</option><option>Funds Availability</option><option>Account Access</option><option>Transfer Issue</option><option>Statement Request</option><option>Profile Maintenance</option></select></label>
+      <label>Priority<select id="casePriority"><option>Medium</option><option>High</option><option>Low</option></select></label>
+      <label>Next step<textarea id="caseNextStep" rows="3" placeholder="Document the next banker action..." required></textarea></label>
+      <button class="primary-btn" type="submit">Create Case</button>
+    </form>
+  </dialog>
+
+  <script src="app.js"></script>
+</body>
+</html>
